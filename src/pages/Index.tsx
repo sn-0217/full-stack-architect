@@ -8,7 +8,10 @@ import ContactSection from "@/components/ContactSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Noise texture overlay */}
+      <div className="noise-overlay" />
+      
       <Navbar />
       <HeroSection />
       <SkillsSection />
@@ -16,8 +19,11 @@ const Index = () => {
       <ProjectsSection />
       <AwardsSection />
       <ContactSection />
-      <footer className="border-t border-border py-8 text-center text-xs text-muted-foreground">
-        © 2024 Sai Santosh Kumar Battula. All rights reserved.
+      
+      <footer className="border-t border-border/50 py-10 text-center">
+        <p className="text-xs text-muted-foreground">
+          © 2024 Sai Santosh Kumar Battula. Built with precision.
+        </p>
       </footer>
     </div>
   );
