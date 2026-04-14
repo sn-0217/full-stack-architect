@@ -3,81 +3,77 @@ import { motion } from "framer-motion";
 const categories = [
   {
     title: "Backend Development",
+    icon: "⚙️",
     skills: ["Java 8/17", "Spring Boot", "Spring MVC", "Spring Data JPA", "Hibernate ORM", "Spring Security", "J2EE", "RESTful APIs", "SOAP"],
   },
   {
     title: "Frontend / Full-Stack",
+    icon: "🎨",
     skills: ["React", "TypeScript", "JavaScript ES6+", "HTML5 / CSS3", "AJAX", "JSON / XML"],
   },
   {
     title: "AI Coding Assistants",
+    icon: "🤖",
     skills: ["Claude Code", "GitHub Copilot", "Cursor AI", "Code Generation", "AI Output Review", "Team Coaching"],
   },
   {
     title: "Cloud (AWS)",
+    icon: "☁️",
     skills: ["EC2", "S3", "Lambda", "EKS", "RDS", "API Gateway", "IAM", "CloudWatch"],
   },
   {
     title: "Databases & Messaging",
+    icon: "🗄️",
     skills: ["MySQL", "Oracle DB / PL-SQL", "PostgreSQL", "MongoDB", "Redis", "Apache Kafka", "RabbitMQ", "IBM MQ", "ElasticSearch"],
   },
   {
     title: "DevOps & Security",
+    icon: "🔒",
     skills: ["Docker", "Kubernetes", "Jenkins CI/CD", "Maven", "Prometheus", "Grafana", "OAuth 2.0", "JWT", "RBAC", "LDAP"],
   },
 ];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-};
-
 const SkillsSection = () => {
   return (
-    <section id="skills" className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="skills" className="py-28 px-6 relative">
+      {/* Ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] opacity-20" style={{ background: 'linear-gradient(90deg, transparent, hsl(165 80% 48%), transparent)' }} />
+
+      <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <p className="text-primary text-sm font-medium tracking-wider uppercase mb-2">Core Competencies</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Technical Expertise</h2>
+          <p className="section-label">Core Competencies</p>
+          <h2 className="section-title">Technical Expertise</h2>
+          <p className="text-muted-foreground mt-3 max-w-md mx-auto text-sm">Full-stack engineering with enterprise Java, modern cloud infrastructure, and AI-assisted development</p>
         </motion.div>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {categories.map((cat) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {categories.map((cat, i) => (
             <motion.div
               key={cat.title}
-              variants={item}
-              className="rounded-xl border border-border bg-card p-6 hover:border-primary/30 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="glass-card-hover p-6"
             >
-              <h3 className="text-sm font-semibold text-foreground mb-4">{cat.title}</h3>
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-xl">{cat.icon}</span>
+                <h3 className="text-sm font-semibold text-foreground">{cat.title}</h3>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-md bg-secondary px-2.5 py-1 text-xs text-secondary-foreground"
-                  >
-                    {skill}
-                  </span>
+                  <span key={skill} className="skill-chip">{skill}</span>
                 ))}
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
