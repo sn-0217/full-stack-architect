@@ -68,16 +68,9 @@
     color: hsl(210 20% 94%);
   }
 
-  /* Mobile: remove tap flash, eliminate 300ms click delay */
+  /* Remove tap highlight flash on mobile (iOS/Android) */
   * {
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
-
-  /* Prevent horizontal scroll from overflowing decorative elements */
-  html, body {
-    max-width: 100vw;
-    overflow-x: hidden;
   }
 }
 
@@ -176,6 +169,11 @@ body {
   overscroll-behavior: none;
 }
 
+/* Clip horizontal overflow at the app root, not on html/body (Lenis needs those unrestricted) */
+#root {
+  overflow-x: hidden;
+}
+
 /* Hide scrollbar — scroll still works via Lenis */
 * {
   scrollbar-width: none; /* Firefox */
@@ -184,4 +182,9 @@ body {
 
 *::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+/* Buttons and interactive elements: fast tap on mobile */
+button, a, [role="button"] {
+  touch-action: manipulation;
 }

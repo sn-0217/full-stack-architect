@@ -13,6 +13,9 @@ export function useLenis() {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
+      // prevent:false ensures Lenis does not call preventDefault on touch events,
+      // which would block native finger-scroll on iOS/Android
+      prevent: () => false,
     });
 
     lenisRef.current = lenis;
