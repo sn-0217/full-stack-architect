@@ -12,7 +12,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-28 px-6 relative">
+    <section id="contact" className="py-16 md:py-28 px-4 sm:px-6 relative">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] opacity-20" style={{ background: 'linear-gradient(90deg, transparent, hsl(165 80% 48%), transparent)' }} />
 
       <div className="max-w-2xl mx-auto text-center">
@@ -32,14 +32,14 @@ const ContactSection = () => {
           </p>
 
           {/* Primary contact buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <a href="mailto:sk17042001@gmail.com" className="btn-primary group">
-              <Mail className="h-4 w-4" />
-              sk17042001@gmail.com
-              <ArrowUpRight className="h-3.5 w-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6">
+            <a href="mailto:sk17042001@gmail.com" className="btn-primary group w-full sm:w-auto justify-center">
+              <Mail className="h-4 w-4 shrink-0" />
+              <span className="truncate">sk17042001@gmail.com</span>
+              <ArrowUpRight className="h-3.5 w-3.5 opacity-50 group-hover:opacity-100 transition-opacity shrink-0" />
             </a>
-            <a href="tel:+919398049275" className="btn-secondary">
-              <Phone className="h-4 w-4" />
+            <a href="tel:+919398049275" className="btn-secondary w-full sm:w-auto justify-center">
+              <Phone className="h-4 w-4 shrink-0" />
               +91 93980 49275
             </a>
           </div>

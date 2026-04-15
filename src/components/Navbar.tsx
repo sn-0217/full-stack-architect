@@ -122,11 +122,23 @@ const Navbar = () => {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleMobileNavClick(e, link.href)}
-                className="block text-sm text-muted-foreground hover:text-foreground py-2.5 px-3 rounded-lg hover:bg-secondary/50 transition-all"
+                className="block text-sm text-muted-foreground hover:text-foreground py-3 px-3 rounded-lg hover:bg-secondary/50 transition-all active:bg-secondary/80"
               >
                 {link.label}
               </a>
             ))}
+            <div className="pt-2 border-t border-border/40 mt-2">
+              <a
+                href="https://docs.google.com/document/d/1yj4-YVBzwYbTrB_-aWKiwuw6l_fNDCdJ/export?format=pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-medium py-3 px-3 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-all"
+                onClick={() => setOpen(false)}
+              >
+                <Download className="h-3.5 w-3.5" />
+                Download Resume
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

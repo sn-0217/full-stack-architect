@@ -35,7 +35,7 @@ const categories = [
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="py-28 px-6 relative">
+    <section id="skills" className="py-16 md:py-28 px-4 sm:px-6 relative">
       {/* Ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] opacity-20" style={{ background: 'linear-gradient(90deg, transparent, hsl(165 80% 48%), transparent)' }} />
 

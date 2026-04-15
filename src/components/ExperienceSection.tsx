@@ -33,7 +33,7 @@ const jobs = [
 
 const ExperienceSection = () => {
   return (
-    <section id="experience" className="py-28 px-6 relative">
+    <section id="experience" className="py-16 md:py-28 px-4 sm:px-6 relative">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] opacity-20" style={{ background: 'linear-gradient(90deg, transparent, hsl(165 80% 48%), transparent)' }} />
 
       <div className="max-w-4xl mx-auto">
@@ -71,7 +71,7 @@ const ExperienceSection = () => {
                   <Briefcase className="h-2.5 w-2.5 text-primary" />
                 </div>
 
-                <div className="glass-card p-6">
+                <div className="glass-card p-5 sm:p-6">
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <span className="text-xs text-muted-foreground font-mono tracking-wide">{job.period}</span>
                     {job.current && (
@@ -79,8 +79,8 @@ const ExperienceSection = () => {
                     )}
                   </div>
 
-                  <h3 className="text-lg font-bold text-foreground">{job.company}</h3>
-                  <p className="text-sm text-muted-foreground mb-5">{job.title} · {job.location}</p>
+                  <h3 className="text-base sm:text-lg font-bold text-foreground">{job.company}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-5 leading-relaxed">{job.title} · {job.location}</p>
 
                   <ul className="space-y-3">
                     {job.bullets.map((bullet, j) => (
