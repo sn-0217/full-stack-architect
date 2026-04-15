@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Full Stack Architect Portfolio
 
 TODO: Document your project here

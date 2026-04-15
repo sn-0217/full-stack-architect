@@ -1,5 +1,49 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Mail, MapPin, Sparkles } from "lucide-react";
+import { useLenisScroll } from "@/hooks/use-lenis-scroll";
+import { useEffect, useRef, useState } from "react";
+
+// Parse "3+" → { end: 3, suffix: "+", decimals: 0 }
+// Parse "99.9%" → { end: 99.9, suffix: "%", decimals: 1 }
+// Parse "15K+" → { end: 15, suffix: "K+", decimals: 0 }
+function parseStat(raw: string): { end: number; suffix: string; decimals: number } {
+  const match = raw.match(/^([\d.]+)(.*)$/);
+  if (!match) return { end: 0, suffix: raw, decimals: 0 };
+  const decimals = match[1].includes(".") ? match[1].split(".")[1].length : 0;
+  return { end: parseFloat(match[1]), suffix: match[2], decimals };
+}
+
+function AnimatedCounter({ raw, delay = 0 }: { raw: string; delay?: number }) {
+  const { end, suffix, decimals } = parseStat(raw);
+  const [display, setDisplay] = useState(0);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (started.current) return;
+      started.current = true;
+      const duration = 1800;
+      const startTime = performance.now();
+
+      function step(now: number) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
+        setDisplay(parseFloat((eased * end).toFixed(decimals)));
+        if (progress < 1) requestAnimationFrame(step);
+        else setDisplay(end);
+      }
+      requestAnimationFrame(step);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [end, decimals, delay]);
+
+  return (
+    <span>
+      {decimals > 0 ? display.toFixed(decimals) : Math.floor(display)}
+      {suffix}
+    </span>
+  );
+}
 
 const stats = [
   { value: "3+", label: "Years Experience" },
@@ -8,6 +52,8 @@ const stats = [
 ];
 
 const HeroSection = () => {
+  const scrollTo = useLenisScroll();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 pt-16">
       {/* Ambient glow orbs */}
@@ -69,11 +115,19 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-wrap justify-center gap-4 mb-20"
         >
-          <a href="#projects" className="btn-primary">
+          <a
+            href="#projects"
+            onClick={(e) => { e.preventDefault(); scrollTo("#projects"); }}
+            className="btn-primary"
+          >
             View My Work
             <ArrowDown className="h-4 w-4" />
           </a>
-          <a href="#contact" className="btn-secondary">
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
+            className="btn-secondary"
+          >
             <Mail className="h-4 w-4" />
             Get In Touch
           </a>
@@ -93,7 +147,9 @@ const HeroSection = () => {
               transition={{ duration: 0.4, delay: 0.7 + i * 0.1 }}
               className="text-center glass-card p-4 rounded-2xl"
             >
-              <div className="text-2xl md:text-3xl font-bold text-gradient">{stat.value}</div>
+              <div className="text-2xl md:text-3xl font-bold text-gradient">
+                <AnimatedCounter raw={stat.value} delay={(0.7 + i * 0.1) * 1000} />
+              </div>
               <div className="text-[11px] text-muted-foreground mt-1.5 font-medium tracking-wide">{stat.label}</div>
             </motion.div>
           ))}

@@ -157,25 +157,19 @@
   }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Smooth scrolling handled by Lenis — do not set scroll-behavior here */
+html,
+body {
+  /* Lenis requires overflow to be visible on html/body so it can intercept scroll */
+  overscroll-behavior: none;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+/* Hide scrollbar — scroll still works via Lenis */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--border));
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground));
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
